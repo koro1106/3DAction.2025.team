@@ -16,9 +16,14 @@ public class NewBehaviourScript : MonoBehaviour
 
     void Update()
     {
-        UpDownPress();
-        
-        ReftLightPress();
+        if(gameObject.tag == "UpDown")
+        {
+          UpDownPress();
+        }
+        if (gameObject.tag == "LeftRight")
+        {
+          ReftLightPress();
+        }
     }
 
 
