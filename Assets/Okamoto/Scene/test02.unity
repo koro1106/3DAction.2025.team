@@ -154,7 +154,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -168,9 +168,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 8
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!135 &154691868
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -256,8 +256,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxPullDistance: 6
   jumpPower: 10
+  minPullThreshold: 0.005
   arrowLine: {fileID: 735508395}
   landingMarker: {fileID: 0}
+  shapeType: 0
 --- !u!4 &154691872
 Transform:
   m_ObjectHideFlags: 0
@@ -809,7 +811,7 @@ GameObject:
   - component: {fileID: 1847799498}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
