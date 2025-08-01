@@ -87,13 +87,15 @@ using UnityEngine.InputSystem;
 public class PullShootParabolicFall : MonoBehaviour
 {
     public float maxPullDistance = 0.06f;
-    public float jumpPower = 5f; // 上方向の倍率
+    public float jumpPower = 5f;
+    public float minPullThreshold = 0.005f;
     public LineRenderer arrowLine;
     public GameObject landingMarker;
     private Rigidbody rb;
     private Camera mainCamera;
     private Vector3 dragStart;
     private bool isDragging;
+    private int remainingPulls = 1;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -105,6 +107,7 @@ public class PullShootParabolicFall : MonoBehaviour
     }
     void Update()
     {
+        if (remainingPulls <= 0) return; // 引っ張り残り0なら無視
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             dragStart = GetMouseWorldPosition();
@@ -126,9 +129,13 @@ public class PullShootParabolicFall : MonoBehaviour
             Vector3 release = GetMouseWorldPosition();
             Vector3 pull = dragStart - release;
             pull.z = 0;
-            if (pull.magnitude > maxPullDistance)
-                pull = pull.normalized * maxPullDistance;
-            Launch(pull);
+            if (pull.magnitude >= minPullThreshold)
+            {
+                if (pull.magnitude > maxPullDistance)
+                    pull = pull.normalized * maxPullDistance;
+                Launch(pull);
+                remainingPulls--; // 空中でも引っ張ったら減らす
+            }
             isDragging = false;
             arrowLine.enabled = false;
             if (landingMarker) landingMarker.SetActive(false);
@@ -138,9 +145,8 @@ public class PullShootParabolicFall : MonoBehaviour
     {
         rb.isKinematic = false;
         rb.useGravity = true;
-        // 引っ張った方向に水平方向の速度、上向きにジャンプ力を追加
         Vector3 velocity = pull.normalized * (pull.magnitude / maxPullDistance) * jumpPower;
-        velocity.y = Mathf.Abs(velocity.magnitude); // 上向き成分（最大高さを作る）
+        velocity.y = Mathf.Max(velocity.y, jumpPower * 0.5f);
         rb.velocity = velocity;
     }
     Vector3 GetMouseWorldPosition()
@@ -159,9 +165,17 @@ public class PullShootParabolicFall : MonoBehaviour
         arrowLine.material.color = rate < 0.33f ? Color.green :
                                    rate < 0.66f ? Color.yellow : Color.red;
     }
-    void OnCollisionEnter(Collision col)
+    void OnCollisionStay(Collision col)
     {
-        Debug.Log("Hit: " + col.gameObject.name);
+        foreach (ContactPoint contact in col.contacts)
+        {
+            // 地面と接触したら引っ張り回数リセット
+            if (Vector3.Dot(contact.normal, Vector3.up) > 0.5f)
+            {
+                remainingPulls = 1;
+                break;
+            }
+        }
     }
 }
 
