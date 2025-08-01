@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -5,34 +6,18 @@ using UnityEngine;
 
 public class Spring : MonoBehaviour
 {
-    private Vector3 originalScale;
-    private bool isSpring = false;
+   public float jumpForce = 10;//’µ‚Ë‚é‹­‚³
+   
 
-    public float springRenge = 2f;
-    public Transform player;
-    void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        originalScale = transform.localScale;
-        originalScale = new Vector3(originalScale.x, 0.3f,originalScale.z);
-    }
 
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space) && !isSpring)
+        if (other.CompareTag("Player"))
         {
-            float yDistance = Mathf.Abs(transform.position.x - player.position.x);
+            Rigidbody rb = other.GetComponentInParent<Rigidbody>();
 
-            if (yDistance <= springRenge)
-            {
-                //StartCoroutine(Spring());
-            }
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);//ˆê’UY‘¬“x‚ðƒ[ƒ‚É
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
-
-    //IEnumerator Spring()
-    //{
-    //    isSpring = true;
-
-    //    yield return new WaitForSeconds(1);
-    //}
 }
