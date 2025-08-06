@@ -5,8 +5,8 @@ using UnityEngine;
 public class PuzzleCtrl : MonoBehaviour
 {
     public Transform puzzle;
-
-
+    private bool isRotating = false;
+   
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.A))
@@ -25,5 +25,13 @@ public class PuzzleCtrl : MonoBehaviour
     public void RotateLeft()
     {
         puzzle.Rotate(0f, 0f, -90f);
+    }
+
+    IEnumerator RotatePazzle(float angle)
+    {
+        isRotating = true;
+
+        float duration = 0.5f;
+        yield return null;
     }
 }
