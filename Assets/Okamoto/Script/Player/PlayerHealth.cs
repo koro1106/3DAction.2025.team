@@ -1,77 +1,91 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.InputSystem;
+
 public class PlayerHealth : MonoBehaviour
 {
     public int maxHP = 100;
     public int currentHP = 100;
-    [Header("HP‚É‰‚¶‚½ƒXƒvƒ‰ƒCƒg")]
-    public Sprite sprite100;
-    public Sprite sprite80;
-    public Sprite sprite60;
-    public Sprite sprite40;
-    public Sprite sprite20;
-    [Header("”j‰óƒGƒtƒFƒNƒg")]
-    public GameObject brokenPrefab;  // ‰ó‚ê‚½ƒp[ƒcƒvƒŒƒnƒu
-    private SpriteRenderer spriteRenderer;
+
+    [Header("HPã«å¿œã˜ãŸã‚¹ãƒ—ãƒ©ã‚¤ãƒˆï¼ˆãƒãƒ†ãƒªã‚¢ãƒ«ï¼‰")]
+    public Material sprite100;
+    public Material sprite80;
+    public Material sprite60;
+    public Material sprite40;
+    public Material sprite20;
+
+    [Header("å£Šã‚ŒãŸã¨ãã®ãƒ—ãƒ¬ãƒãƒ–")]
+    public GameObject brokenPrefab;
+
+    public GameObject child;
+    // Renderer ã«å¤‰æ›´
+    private Renderer matRenderer;
+
     private bool isDead = false;
+
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        // å­ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã® Renderer ã‚’æ¢ã™
+        matRenderer = child.GetComponentInChildren<Renderer>();
+        if (matRenderer == null)
+        {
+            Debug.LogError("Renderer ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ï¼Visual å­ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç¢ºèªã—ã¦ãã ã•ã„ã€‚");
+        }
         UpdateSprite();
     }
+
     void Update()
     {
-       if(Keyboard.current.spaceKey.wasPressedThisFrame)
+        // ã‚¹ãƒšãƒ¼ã‚¹ã‚­ãƒ¼ã§5ãƒ€ãƒ¡ãƒ¼ã‚¸ãƒ†ã‚¹ãƒˆ
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             TakeDamage(5);
         }
     }
+
     public void TakeDamage(int amount)
     {
         if (isDead) return;
+
         currentHP -= amount;
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
         UpdateSprite();
+
         if (currentHP <= 0)
         {
             Die();
         }
     }
+
     void UpdateSprite()
     {
-        if (spriteRenderer == null)
-        {
-            Debug.LogWarning("SpriteRenderer ‚ª null ‚Å‚·B");//‚±‚±‚È‚ñ‚©Œ¾‚í‚ê‚Ä‚é
-            return;
-        }
-        Debug.Log($"HP: {currentHP}");
+        if (matRenderer == null) return;
+
         if (currentHP > 80 && sprite100 != null)
-            spriteRenderer.sprite = sprite100;
+            matRenderer.material = sprite100;
         else if (currentHP > 60 && sprite80 != null)
-            spriteRenderer.sprite = sprite80;
+            matRenderer.material = sprite80;
         else if (currentHP > 40 && sprite60 != null)
-            spriteRenderer.sprite = sprite60;
+            matRenderer.material = sprite60;
         else if (currentHP > 20 && sprite40 != null)
-            spriteRenderer.sprite = sprite40;
+            matRenderer.material = sprite40;
         else if (sprite20 != null)
-            spriteRenderer.sprite = sprite20;
-        else
-            Debug.LogWarning("‚Ç‚Ì Sprite ‚àİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñI");
+            matRenderer.material = sprite20;
     }
+
     void Die()
     {
         isDead = true;
-        // ƒoƒ‰ƒoƒ‰‚ÌƒvƒŒƒnƒu‚ğo‚·
+
         if (brokenPrefab != null)
         {
             GameObject broken = Instantiate(brokenPrefab, transform.position, transform.rotation);
-            // Šeƒp[ƒc‚É”š”­“I‚È—Í‚ğ‰Á‚¦‚éiƒIƒvƒVƒ‡ƒ“j
             foreach (Rigidbody rb in broken.GetComponentsInChildren<Rigidbody>())
             {
                 Vector3 force = Random.onUnitSphere * Random.Range(2f, 5f);
                 rb.AddForce(force, ForceMode.Impulse);
             }
         }
-        Destroy(gameObject); // ©•ª©giƒvƒŒƒCƒ„[j‚ğ”j‰ó
+
+        Destroy(gameObject);
     }
 }
