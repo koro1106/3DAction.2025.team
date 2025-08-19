@@ -1164,6 +1164,10 @@ MonoBehaviour:
   sprite20: {fileID: 2100000, guid: ec82cf4a8e5a7f14696439d6d9d15adc, type: 2}
   brokenPrefab: {fileID: 1655390676}
   child: {fileID: 446755682}
+  fragmentPrefab: {fileID: 7977000405229894533, guid: c84f9eb16c11fe84db74e2c0483200d2,
+    type: 3}
+  fragmentCount: 40
+  force: 200
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
