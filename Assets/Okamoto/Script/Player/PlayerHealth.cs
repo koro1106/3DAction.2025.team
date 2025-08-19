@@ -17,19 +17,29 @@ public class PlayerHealth : MonoBehaviour
     public GameObject brokenPrefab;
 
     public GameObject child;
-    // Renderer に変更
     private Renderer matRenderer;
 
     private bool isDead = false;
 
+    // 破片関連の設定
+    public GameObject fragmentPrefab;
+    public int fragmentCount = 10;
+    public float force = 500f;
+
     void Start()
     {
-        // 子オブジェクトの Renderer を探す
-        matRenderer = child.GetComponentInChildren<Renderer>();
+        if (child == null && transform.childCount > 0)
+        {
+            child = transform.GetChild(0).gameObject;
+        }
+
+        matRenderer = child != null ? child.GetComponentInChildren<Renderer>() : null;
+
         if (matRenderer == null)
         {
             Debug.LogError("Renderer が見つかりません！Visual 子オブジェクトを確認してください。");
         }
+
         UpdateSprite();
     }
 
@@ -74,18 +84,39 @@ public class PlayerHealth : MonoBehaviour
 
     void Die()
     {
-        isDead = true;
+    isDead = true;
 
-        if (brokenPrefab != null)
+    // 破壊されたプレハブを生成
+    //if (brokenPrefab != null)
+    //{
+    //    GameObject broken = Instantiate(brokenPrefab, transform.position, transform.rotation);
+    //    broken.transform.localScale = transform.localScale; // スケールも一致させる
+
+    //    // Rigidbody があるならランダムな力を加える
+    //    foreach (Rigidbody rb in broken.GetComponentsInChildren<Rigidbody>())
+    //    {
+    //        Vector3 force = Random.onUnitSphere * Random.Range(2f, 5f);
+    //        rb.AddForce(force, ForceMode.Impulse);
+    //    }
+    //}
+
+    // 破片を飛ばす（追加演出）
+    if (fragmentPrefab != null)
+    {
+        for (int i = 0; i < fragmentCount; i++)
         {
-            GameObject broken = Instantiate(brokenPrefab, transform.position, transform.rotation);
-            foreach (Rigidbody rb in broken.GetComponentsInChildren<Rigidbody>())
+            Vector3 randomPosition = transform.position + Random.insideUnitSphere * 0.5f;
+            GameObject fragment = Instantiate(fragmentPrefab, randomPosition, Random.rotation);
+
+            Rigidbody rb = fragment.GetComponent<Rigidbody>();
+            if (rb != null)
             {
-                Vector3 force = Random.onUnitSphere * Random.Range(2f, 5f);
-                rb.AddForce(force, ForceMode.Impulse);
+                rb.AddForce(Random.insideUnitSphere * force);
             }
         }
-
-        Destroy(gameObject);
     }
+
+    // 最後に自分（プレイヤー）を削除
+    Destroy(gameObject);
+}
 }
