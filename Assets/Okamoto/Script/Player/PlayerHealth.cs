@@ -19,7 +19,7 @@ public class PlayerHealth : MonoBehaviour
     public GameObject child;
     private Renderer matRenderer;
 
-    private bool isDead = false;
+    public bool isDead = false;
 
     // 破片関連の設定
     public GameObject fragmentPrefab;
@@ -66,7 +66,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    void UpdateSprite()
+    public void UpdateSprite()
     {
         if (matRenderer == null) return;
 
@@ -82,7 +82,7 @@ public class PlayerHealth : MonoBehaviour
             matRenderer.material = sprite20;
     }
 
-    void Die()
+    public  void Die()
     {
     isDead = true;
 
@@ -118,5 +118,5 @@ public class PlayerHealth : MonoBehaviour
 
     // 最後に自分（プレイヤー）を削除
     Destroy(gameObject);
-}
+    }
 }
