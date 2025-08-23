@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class NewBehaviourScript : MonoBehaviour
@@ -8,15 +9,19 @@ public class NewBehaviourScript : MonoBehaviour
     private float initialY;                           //Y初期位置
     private float initialX;                           //X初期位置
 
+    private PlayerHealth playerHealth;
     void Start()
     {
         initialY = transform.localPosition.y;
         initialX = transform.localPosition.x;
+
     }
 
     void Update()
     {
-        if(gameObject.tag == "UpDown")
+       // if (playerHealth.isDead) return;
+
+        if (gameObject.tag == "UpDown")
         {
           UpDownPress();
         }
@@ -30,7 +35,6 @@ public class NewBehaviourScript : MonoBehaviour
     void UpDownPress()
     {
         float newY = transform.localPosition.y;
-
         if (isMoveUp)
         {
             newY += moveSpeed * Time.deltaTime;//上に動かす
@@ -52,8 +56,7 @@ public class NewBehaviourScript : MonoBehaviour
     }
     void ReftLightPress()
     {
-        {
-            float newX = transform.localPosition.x;
+        float newX = transform.localPosition.x;
 
             if (isMoveUp)
             {
@@ -73,6 +76,16 @@ public class NewBehaviourScript : MonoBehaviour
             }
             //新しい位置を設定
             transform.localPosition = new Vector3(newX, transform.localPosition.y, transform.localPosition.z);
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        playerHealth = other.GetComponent<PlayerHealth>();
+        
+        if (other.CompareTag("Player"))
+        {
+            playerHealth.TakeDamage(100);
         }
     }
 }
