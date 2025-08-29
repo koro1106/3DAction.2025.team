@@ -429,7 +429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1526772539}
   attackRangeX: 10
-  speed: 5
+  speed: 8
 --- !u!54 &806484992
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -537,7 +537,7 @@ Transform:
   m_GameObject: {fileID: 806484990}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.01, y: 1, z: 0.04}
+  m_LocalPosition: {x: -9.26, y: 1, z: 0.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -846,8 +846,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1.0016196, z: 1}
+  m_Center: {x: 0, y: 0.0018388749, z: 0}
 --- !u!23 &1467066226
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -907,7 +907,7 @@ Transform:
   m_GameObject: {fileID: 1467066223}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.42, y: 7.82, z: -0.14}
+  m_LocalPosition: {x: 3.28, y: 7.82, z: -0.14}
   m_LocalScale: {x: 1, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -934,7 +934,7 @@ PrefabInstance:
     - target: {fileID: 8844254675876199412, guid: 0c0a22cf349d9954b97a39f8bbfc3701,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.38329864
+      value: -3.1
       objectReference: {fileID: 0}
     - target: {fileID: 8844254675876199412, guid: 0c0a22cf349d9954b97a39f8bbfc3701,
         type: 3}
@@ -1045,8 +1045,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.017151166, y: 1, z: 1}
+  m_Center: {x: 0.4914244, y: 0, z: 0}
 --- !u!23 &1753245815
 MeshRenderer:
   m_ObjectHideFlags: 0

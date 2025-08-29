@@ -10,6 +10,8 @@ public class Slider : MonoBehaviour
     private Collider col;
     private bool isSlide = false;
     private float slideDirection = 0f;//スライダーの方向
+    private PlayerHealth playerHealth;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -52,6 +54,8 @@ public class Slider : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            playerHealth = other.GetComponent<PlayerHealth>();
+            playerHealth.TakeDamage(1);
             col.enabled = false;//playerと接触したら通過する
         }
     }
