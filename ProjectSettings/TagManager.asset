@@ -6,6 +6,8 @@ TagManager:
   tags:
   - UpDown
   - LeftRight
+  - Ground
+  - Door
   layers:
   - Default
   - TransparentFX
