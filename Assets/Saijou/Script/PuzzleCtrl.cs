@@ -6,13 +6,16 @@ public class PuzzleCtrl : MonoBehaviour
     public Transform puzzle; // パズル本体
     public GameObject piecePrefub; // ピースのプレハブ
     public GameObject fixedPrefub;  // 固定ピース
+    
     GameObject[,] grid = new GameObject[3, 3];
-    private Vector2Int blankPos = new Vector2Int(0, 2); // 空白マスの位置
-    private Vector2Int fixedPiecePos = new Vector2Int(2, 2); // 固定マス
+    private Vector2Int blankPos = new Vector2Int(0, 0); // 空白マスの位置
+    private Vector2Int fixedPiecePos = new Vector2Int(2, 0); // 固定マス
     private bool isRotating = false;
 
     void Start()
     {
+        //puzzle.localPosition = new Vector3(-1, 1, 0); //回転の中心
+
         // ピース生成して配置（0,0を空白とする）
         for (int x = 0; x < 3; x++)
         {
@@ -22,8 +25,8 @@ public class PuzzleCtrl : MonoBehaviour
 
                 if (pos == blankPos || pos == fixedPiecePos) continue; // 空白や固定ピースをスキップ
 
-                // ピースを整数座標で生成
-                Vector2Int piecePos = new Vector2Int(x, y);  
+                // ピース生成
+                Vector2Int piecePos = new Vector2Int(x, -y);  
                 GameObject piece = Instantiate(piecePrefub, new Vector3(piecePos.x, piecePos.y, 0), Quaternion.identity, puzzle);
                 grid[x, y] = piece;
             }
@@ -100,7 +103,7 @@ public class PuzzleCtrl : MonoBehaviour
                         //Vector3 newPosition = new Vector3(nx,ny, 0);
                         //grid[nx, ny].transform.localPosition = newPosition;
                         Vector3 startPos = grid[nx, ny].transform.localPosition;
-                        Vector3 targetPos = new Vector3(nx, ny, 0);
+                        Vector3 targetPos = new Vector3(nx, -ny, 0);
 
                         StartCoroutine(MovePieceSmoothly(grid[nx, ny], startPos, targetPos, moveSpeed));
 
@@ -112,6 +115,9 @@ public class PuzzleCtrl : MonoBehaviour
             }
         } while (moved); // ピースが移動する限りループ
     }
+
+
+
 
     private bool IsInBounds(int x, int y)
     {
@@ -169,4 +175,6 @@ public class PuzzleCtrl : MonoBehaviour
         }
         piece.transform.localPosition = targetPos;//目標位置に設定
     }
+
+  
 }
