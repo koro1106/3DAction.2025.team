@@ -275,7 +275,6 @@ Transform:
   m_Children:
   - {fileID: 735508394}
   - {fileID: 2037797818}
-  - {fileID: 1666781559}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &154691873
@@ -299,6 +298,7 @@ MonoBehaviour:
   sprite20: {fileID: 2100000, guid: ec82cf4a8e5a7f14696439d6d9d15adc, type: 2}
   brokenPrefab: {fileID: 154691866}
   child: {fileID: 2037797814}
+  isDead: 0
   fragmentPrefab: {fileID: 7977000405229894533, guid: c84f9eb16c11fe84db74e2c0483200d2,
     type: 3}
   fragmentCount: 40
@@ -817,12 +817,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1666781555}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1.46, z: 3.9300005}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.240001, y: 2.45, z: -0}
   m_LocalScale: {x: 1, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 154691872}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1847799497
 GameObject:
@@ -1041,4 +1041,5 @@ SceneRoots:
   - {fileID: 1392101015}
   - {fileID: 676978418}
   - {fileID: 1847799501}
+  - {fileID: 1666781559}
   - {fileID: 154691872}
