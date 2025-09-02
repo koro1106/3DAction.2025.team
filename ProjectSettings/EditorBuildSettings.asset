@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Saijou/Scene/PuzzleScene.unity
+    guid: 637d3c4b48bee0f43b2460e8f6368436
   m_configObjects: {}
