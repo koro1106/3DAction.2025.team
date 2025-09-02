@@ -18,7 +18,7 @@ public class Door : MonoBehaviour
     void OpenDoor()
     {
         isDoorOpne = true;
-
+        Debug.Log(isDoorOpne);
         //ƒV[ƒ“ˆÚ“®
         SceneManager.LoadScene(sceneToLoad);
     }
