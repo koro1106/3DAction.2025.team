@@ -1,10 +1,16 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
     public int maxHP = 100;
     public int currentHP = 100;
+    private MeshRenderer mr;
+    [SerializeField]private MeshRenderer m;
+
+    [SerializeField] private PlayerDestoroy playerDestoroy;
 
     [Header("HPに応じたスプライト（マテリアル）")]
     public Material sprite100;
@@ -84,7 +90,7 @@ public class PlayerHealth : MonoBehaviour
 
     public  void Die()
     {
-    isDead = true;
+      isDead = true;
 
     // 破壊されたプレハブを生成
     //if (brokenPrefab != null)
@@ -101,22 +107,25 @@ public class PlayerHealth : MonoBehaviour
     //}
 
     // 破片を飛ばす（追加演出）
-    if (fragmentPrefab != null)
-    {
-        for (int i = 0; i < fragmentCount; i++)
-        {
-            Vector3 randomPosition = transform.position + Random.insideUnitSphere * 0.5f;
-            GameObject fragment = Instantiate(fragmentPrefab, randomPosition, Random.rotation);
+       if (fragmentPrefab != null)
+       {
+          for (int i = 0; i < fragmentCount; i++)
+          {
+              Vector3 randomPosition = transform.position + Random.insideUnitSphere * 0.5f;
+              GameObject fragment = Instantiate(fragmentPrefab, randomPosition, Random.rotation);
 
-            Rigidbody rb = fragment.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.AddForce(Random.insideUnitSphere * force);
-            }
-        }
-    }
-
-    // 最後に自分（プレイヤー）を削除
-    Destroy(gameObject);
+              Rigidbody rb = fragment.GetComponent<Rigidbody>();
+              if (rb != null)
+              {
+                 rb.AddForce(Random.insideUnitSphere * force);
+              }
+          }
+       }
+        StartCoroutine(playerDestoroy.LoadSelectionScene());
+        // gameObject.SetActive(false); //PlayerObjectを非表示にして破片だけ残す
+        mr = GetComponent<MeshRenderer>();
+        mr.enabled = false;
+        m.enabled = false;
+        //Destroy(gameObject);
     }
 }
