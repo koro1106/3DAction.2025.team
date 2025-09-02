@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Saijou/Scene/PuzzleScene.unity
     guid: 637d3c4b48bee0f43b2460e8f6368436
+  - enabled: 1
+    path: Assets/Scenes/SelectionScene.unity
+    guid: da9885a598763f741a67fdaa25a1f695
+  - enabled: 1
+    path: Assets/Scenes/TitleScene.unity
+    guid: b3ac761554522ce4492ba9e57a89a754
+  - enabled: 1
+    path: Assets/Scenes/GameOverScene.unity
+    guid: 63dbb1db509889344a3a89ae553c3921
   m_configObjects: {}
