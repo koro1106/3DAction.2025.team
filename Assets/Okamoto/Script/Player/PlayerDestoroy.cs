@@ -9,6 +9,6 @@ public class PlayerDestoroy : MonoBehaviour
         Debug.Log("コルーチン呼ばれた");
         yield return new WaitForSeconds(1f);//1秒待つ
 
-        SceneManager.LoadScene("SelectionScene");//選択画面に遷移
+        SceneManager.LoadScene("GameOverScene");//選択画面に遷移
    }
 }
