@@ -14,28 +14,9 @@ public class PuzzleCtrl : MonoBehaviour
 
     void Start()
     {
-        //puzzle.localPosition = new Vector3(-1, 1, 0); //回転の中心
-
-        // ピース生成して配置（0,0を空白とする）
-        for (int x = 0; x < 3; x++)
-        {
-            for (int y = 0; y < 3; y++)
-            {
-                Vector2Int pos = new Vector2Int(x, y);
-
-                if (pos == blankPos || pos == fixedPiecePos) continue; // 空白や固定ピースをスキップ
-
-                // ピース生成
-                Vector2Int piecePos = new Vector2Int(x, -y);  
-                GameObject piece = Instantiate(piecePrefub, new Vector3(piecePos.x, piecePos.y, 0), Quaternion.identity, puzzle);
-                grid[x, y] = piece;
-            }
-        }
-
-        // 固定ピース生成
-        Vector2Int fixedPos = new Vector2Int(fixedPiecePos.x, fixedPiecePos.y);
-        Instantiate(fixedPrefub, new Vector3(fixedPos.x, fixedPos.y, 0), Quaternion.identity, puzzle);
+        InitializePuzzle();//初期化処理
     }
+   
 
     void Update()
     {
@@ -57,16 +38,54 @@ public class PuzzleCtrl : MonoBehaviour
 
         // 回転角度に応じて「下方向の配列移動ベクトル」を決定
         Vector2Int downDir;
-        if (Approximately(angleZ, 0)) downDir = new Vector2Int(0, -1); // 下
+        if (Approximately(angleZ, 0)) downDir = new Vector2Int(0, 1); // 下
         else if (Approximately(angleZ, 90)) downDir = new Vector2Int(-1, 0); // 右
-        else if (Approximately(angleZ, 180)) downDir = new Vector2Int(0, 1); // 上
+        else if (Approximately(angleZ, 180)) downDir = new Vector2Int(0, -1); // 上
         else if (Approximately(angleZ, 270)) downDir = new Vector2Int(1, 0); // 左
         else downDir = new Vector2Int(0, -1); // デフォルト下
 
         MovePiecesDown(downDir); // ピースを移動させる
     }
+    
+    public void InitializePuzzle()//初期化処理
+    {
+        //ボトル以外の子オブジェクト全削除（リセットのため）
+        foreach (Transform child in puzzle)
+        {
+            if (child.gameObject.CompareTag("Bottle"))
+            {
+                continue;//ボトル消さない
+            }
+            Destroy(child.gameObject);
+        }
 
-    bool Approximately(float a, float b, float threshold = 1f) // より厳密な比較
+        //グリッドと空白位置の初期化
+        grid = new GameObject[3, 3];
+        blankPos = new Vector2Int(0, 0);
+
+        //パズル回転をリセット
+        puzzle.localRotation = Quaternion.identity;
+
+        //ピース生成
+        for (int x = 0; x < 3; x++)
+        {
+            for (int y = 0; y < 3; y++)
+            {
+                Vector2Int pos = new Vector2Int(x, y);
+
+                if (pos == blankPos || pos == fixedPiecePos) continue;
+
+                Vector3 localPos = new Vector3(x - 1, -(y - 1), 0);
+                GameObject piece = Instantiate(piecePrefub, localPos, Quaternion.identity, puzzle);
+                grid[x, y] = piece;
+            }
+        }
+
+        //固定ピース生成
+        Vector3 fixedLocalPos = new Vector3(fixedPiecePos.x - 1, -(fixedPiecePos.y - 1), 0);
+        Instantiate(fixedPrefub, fixedLocalPos, Quaternion.identity, puzzle);
+    }
+    bool Approximately(float a, float b, float threshold = 1f) //より厳密な比較
     {
         return Mathf.Abs(Mathf.DeltaAngle(a, b)) < threshold;
     }
@@ -103,7 +122,8 @@ public class PuzzleCtrl : MonoBehaviour
                         //Vector3 newPosition = new Vector3(nx,ny, 0);
                         //grid[nx, ny].transform.localPosition = newPosition;
                         Vector3 startPos = grid[nx, ny].transform.localPosition;
-                        Vector3 targetPos = new Vector3(nx, -ny, 0);
+                        //Vector3 targetPos = new Vector3(nx, -ny, 0);
+                        Vector3 targetPos = new Vector3(nx - 1, -(ny - 1), 0);
 
                         StartCoroutine(MovePieceSmoothly(grid[nx, ny], startPos, targetPos, moveSpeed));
 
@@ -115,9 +135,6 @@ public class PuzzleCtrl : MonoBehaviour
             }
         } while (moved); // ピースが移動する限りループ
     }
-
-
-
 
     private bool IsInBounds(int x, int y)
     {

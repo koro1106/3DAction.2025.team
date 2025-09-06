@@ -8,6 +8,7 @@ TagManager:
   - LeftRight
   - Ground
   - Door
+  - Bottle
   layers:
   - Default
   - TransparentFX
