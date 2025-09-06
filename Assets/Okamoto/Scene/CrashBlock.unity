@@ -160,7 +160,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -578,6 +578,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CrashBlock
+      objectReference: {fileID: 0}
+    - target: {fileID: 9156186341021379484, guid: bf9de0c3387ef644fa369b5435d0219f,
+        type: 3}
+      propertyPath: force
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 9156186341021379484, guid: bf9de0c3387ef644fa369b5435d0219f,
+        type: 3}
+      propertyPath: fragmentCount
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 9182847932846134578, guid: bf9de0c3387ef644fa369b5435d0219f,
         type: 3}
