@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PuzzleCtrl : MonoBehaviour
@@ -6,17 +7,37 @@ public class PuzzleCtrl : MonoBehaviour
     public Transform puzzle; // パズル本体
     public GameObject piecePrefub; // ピースのプレハブ
     public GameObject fixedPrefub;  // 固定ピース
-    
+
     GameObject[,] grid = new GameObject[3, 3];
     private Vector2Int blankPos = new Vector2Int(0, 0); // 空白マスの位置
     private Vector2Int fixedPiecePos = new Vector2Int(2, 0); // 固定マス
     private bool isRotating = false;
 
+    private int[] currentPieceOrder; //現在の初期配置
+    public int difficulty = 0; //難易度 0?3
+
     void Start()
     {
         InitializePuzzle();//初期化処理
     }
-   
+
+    //パズルのパターン
+    private int[] GetPatternByDifficulty(int level)
+    {
+        switch (level)
+        {
+            case 0:
+                return new int[] { 2, 0, 5, 3, 1, 4, 6 }; //簡単
+            case 1:
+                return new int[] { 6, 5, 4, 3, 2, 1, 0 }; //難しめ
+            case 2:
+                return new int[] { 1, 4, 0, 2, 5, 6, 3 }; //ランダム1
+            case 3:
+                return new int[] { 3, 1, 6, 0, 5, 4, 2 }; //ランダム2
+            default:
+                return new int[] { 0, 1, 2, 3, 4, 5, 6 }; //デフォルト
+        }
+    }
 
     void Update()
     {
@@ -45,8 +66,19 @@ public class PuzzleCtrl : MonoBehaviour
         else downDir = new Vector2Int(0, -1); // デフォルト下
 
         MovePiecesDown(downDir); // ピースを移動させる
+        StartCoroutine(DelayedCheckClear());
     }
-    
+
+    IEnumerator DelayedCheckClear()
+    {
+        yield return new WaitForSeconds(0.6f); // 移動が終わるのを少し待つ
+
+        if (CheckClear())
+        {
+            Debug.Log("クリア！");
+            //ここでクリア演出やシーン遷移などを実装
+        }
+    }
     public void InitializePuzzle()//初期化処理
     {
         //ボトル以外の子オブジェクト全削除（リセットのため）
@@ -62,26 +94,37 @@ public class PuzzleCtrl : MonoBehaviour
         //グリッドと空白位置の初期化
         grid = new GameObject[3, 3];
         blankPos = new Vector2Int(0, 0);
+        puzzle.localRotation = Quaternion.identity; //パズル回転をリセット
 
-        //パズル回転をリセット
-        puzzle.localRotation = Quaternion.identity;
-
-        //ピース生成
-        for (int x = 0; x < 3; x++)
+        // 空白.固定を除いたポジションリスト作成
+        List<Vector2Int> availablePositions = new List<Vector2Int>();
+        for (int y = 0; y < 3; y++)
         {
-            for (int y = 0; y < 3; y++)
+            for (int x = 0; x < 3; x++)
             {
                 Vector2Int pos = new Vector2Int(x, y);
-
                 if (pos == blankPos || pos == fixedPiecePos) continue;
-
-                Vector3 localPos = new Vector3(x - 1, -(y - 1), 0);
-                GameObject piece = Instantiate(piecePrefub, localPos, Quaternion.identity, puzzle);
-                grid[x, y] = piece;
+                availablePositions.Add(pos);
             }
         }
 
-        //固定ピース生成
+        // ピースIDの並びを難易度で決定
+        currentPieceOrder = GetPatternByDifficulty(difficulty);
+
+        // ピース生成
+        for (int i = 0; i < availablePositions.Count; i++)
+        {
+            Vector2Int pos = availablePositions[i];
+            Vector3 localPos = new Vector3(pos.x - 1, -(pos.y - 1), 0);
+            GameObject piece = Instantiate(piecePrefub, localPos, Quaternion.identity, puzzle);
+
+            PuzzlePiece pp = piece.GetComponent<PuzzlePiece>();
+            pp.pieceID = currentPieceOrder[i]; // IDを割り当て
+
+            grid[pos.x, pos.y] = piece;
+        }
+
+        // 固定ピース生成
         Vector3 fixedLocalPos = new Vector3(fixedPiecePos.x - 1, -(fixedPiecePos.y - 1), 0);
         Instantiate(fixedPrefub, fixedLocalPos, Quaternion.identity, puzzle);
     }
@@ -119,10 +162,7 @@ public class PuzzleCtrl : MonoBehaviour
                         grid[x, y] = null;
 
                         // 新しい位置にピースを移動
-                        //Vector3 newPosition = new Vector3(nx,ny, 0);
-                        //grid[nx, ny].transform.localPosition = newPosition;
                         Vector3 startPos = grid[nx, ny].transform.localPosition;
-                        //Vector3 targetPos = new Vector3(nx, -ny, 0);
                         Vector3 targetPos = new Vector3(nx - 1, -(ny - 1), 0);
 
                         StartCoroutine(MovePieceSmoothly(grid[nx, ny], startPos, targetPos, moveSpeed));
@@ -158,9 +198,6 @@ public class PuzzleCtrl : MonoBehaviour
         Quaternion startRot = puzzle.rotation;
         Quaternion endRot = startRot * Quaternion.Euler(0f, 0f, angle); // Z軸回りのみ
 
-        //回転軸（1,1,1）に
-       // Vector3 rotationCenter = new Vector3(1, 1, 1);
-
         while (time < duration)
         {
             // Slerp＝開始から終了に向かってtの割合だけ進んだ回転を返す
@@ -181,7 +218,7 @@ public class PuzzleCtrl : MonoBehaviour
         float distance = Vector3.Distance(startPos, targetPos);//移動距離
         float startTime = Time.time;//移動開始時間
 
-        while(Vector3.Distance(piece.transform.localPosition, targetPos) > 0.05f)//少しずつ近づける
+        while (Vector3.Distance(piece.transform.localPosition, targetPos) > 0.05f)//少しずつ近づける
         {
             float dis = (Time.time - startTime) * moveSpeed;//移動した距離
             float percentage = dis / distance;//移動の進捗割合
@@ -193,5 +230,32 @@ public class PuzzleCtrl : MonoBehaviour
         piece.transform.localPosition = targetPos;//目標位置に設定
     }
 
-  
+    //クリア判定
+    bool CheckClear()
+    {
+        //正解パターン
+        int[] correntOrder = new int[] { 0, 1, 2, 3, 4, 5, 6 }; 
+        
+        int orderIndex = 0;
+        for (int y = 0; y < 3; y++)
+        {
+            for (int x = 0; x < 3; x++)
+            {
+                Vector2Int pos = new Vector2Int(x, y);
+                if (pos == blankPos || pos == fixedPiecePos) continue;
+
+                GameObject piece = grid[x, y];
+                if (piece == null) return false;
+
+                PuzzlePiece p = piece.GetComponent<PuzzlePiece>();
+                if (p.pieceID != correntOrder[orderIndex])
+                {
+                    return false;
+                }
+                orderIndex++;
+            }
+        }
+
+        return true;
+    }
 }
