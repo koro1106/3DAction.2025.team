@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class PuzzleCtrl : MonoBehaviour
 {
     public Transform puzzle; // パズル本体
     public GameObject piecePrefub; // ピースのプレハブ
     public GameObject fixedPrefub;  // 固定ピース
+    public UnityEngine.UI.Slider progressSlider;//進捗度ゲージ
 
     GameObject[,] grid = new GameObject[3, 3];
     private Vector2Int blankPos = new Vector2Int(0, 0); // 空白マスの位置
@@ -19,6 +21,7 @@ public class PuzzleCtrl : MonoBehaviour
     void Start()
     {
         InitializePuzzle();//初期化処理
+        UpdateProgress();//進捗度ゲージ更新
     }
 
     //パズルのパターン
@@ -73,6 +76,8 @@ public class PuzzleCtrl : MonoBehaviour
     {
         yield return new WaitForSeconds(0.6f); // 移動が終わるのを少し待つ
 
+        //進捗度ゲージ更新
+        UpdateProgress();
         if (CheckClear())
         {
             Debug.Log("クリア！");
@@ -257,5 +262,46 @@ public class PuzzleCtrl : MonoBehaviour
         }
 
         return true;
+    }
+
+    //正解しているピースの数を返す
+    public int GetCorrectPieceCount()
+    {
+        int[] correctOrderFull = new int[9] { -1, 0, 1, 2, -1, 3, 4, 5, 6 };
+        // -1 は空白や固定マスの位置（そこは無視）
+
+        int correctCount = 0;
+
+        for (int y = 0; y < 3; y++)
+        {
+            for (int x = 0; x < 3; x++)
+            {
+                int index = y * 3 + x;
+                Vector2Int pos = new Vector2Int(x, y);
+
+                if (pos == blankPos || pos == fixedPiecePos)
+                    continue; // 空白と固定は無視
+
+                GameObject piece = grid[x, y];
+                if (piece == null) continue;
+
+                PuzzlePiece p = piece.GetComponent<PuzzlePiece>();
+
+                if (p.pieceID == correctOrderFull[index])
+                {
+                    correctCount++;
+                }
+            }
+        }
+        return correctCount;
+    }
+
+    void UpdateProgress()
+    {
+        int correct = GetCorrectPieceCount();
+        int total = 7;// 全部で７個の可動ピース
+
+        progressSlider.value = (float)correct / total;// 0.0から1,0の割合でセットする
+        Debug.Log("進捗度" + correct);
     }
 }
