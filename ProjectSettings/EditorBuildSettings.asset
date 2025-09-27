@@ -12,8 +12,14 @@ EditorBuildSettings:
     path: Assets/Scenes/SelectionScene.unity
     guid: da9885a598763f741a67fdaa25a1f695
   - enabled: 1
-    path: Assets/Scenes/MainScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/MainStage1.unity
+    guid: 13bffff46b51e0443b06cfd51fd8e44c
+  - enabled: 1
+    path: Assets/Scenes/MainStage2.unity
+    guid: 9b26cd0ac90b4f243b0f78b7b798c317
+  - enabled: 1
+    path: Assets/Scenes/MainStage3.unity
+    guid: 77d8bcbcd8a793b409f675cec0455f92
   - enabled: 1
     path: Assets/Saijou/Scene/PuzzleScene.unity
     guid: 637d3c4b48bee0f43b2460e8f6368436

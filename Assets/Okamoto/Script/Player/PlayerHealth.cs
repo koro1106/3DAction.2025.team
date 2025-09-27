@@ -89,7 +89,7 @@ public class PlayerHealth : MonoBehaviour
     public  void Die()
     {
       isDead = true;
-
+        Debug.Log("死んだ");
     // 破壊されたプレハブを生成
     //if (brokenPrefab != null)
     //{

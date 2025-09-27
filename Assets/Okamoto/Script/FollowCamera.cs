@@ -10,11 +10,13 @@ public class FollowCamera : MonoBehaviour
     {
         if (target == null) return;
 
+        //‰ñ“]ŒÅ’è
+        transform.rotation = Quaternion.identity;
         Vector3 desiredPosition = target.position + offset;
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
         transform.position = smoothedPosition;
 
         // í‚ÉƒvƒŒƒCƒ„[‚ğŒ©‚é
-        transform.LookAt(target);
+       // transform.LookAt(target);
     }
 }

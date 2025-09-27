@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
+using UnityEngine.Timeline;
 using static UnityEditor.PlayerSettings;
 
 public class PuzzleCtrl : MonoBehaviour
@@ -17,6 +20,10 @@ public class PuzzleCtrl : MonoBehaviour
 
     private int[] currentPieceOrder; //現在の初期配置
     public int difficulty = 0; //難易度 0?3
+
+   [SerializeField] private PlayableDirector playableDirector;
+   [SerializeField] private GameObject UI;
+   [SerializeField] private GameObject TimeLine;
 
     void Start()
     {
@@ -81,7 +88,16 @@ public class PuzzleCtrl : MonoBehaviour
         if (CheckClear())
         {
             Debug.Log("クリア！");
-            //ここでクリア演出やシーン遷移などを実装
+            UI.SetActive(false);
+            TimeLine.SetActive(true);
+            if (playableDirector != null)
+            {
+                playableDirector.Play();  // Timeline再生開始
+            }
+            if (Input.GetKeyDown(KeyCode.KeypadEnter))
+            {
+                SceneManager.LoadScene("MainStage1");
+            }
         }
     }
     public void InitializePuzzle()//初期化処理

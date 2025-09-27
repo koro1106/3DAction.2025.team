@@ -85,6 +85,7 @@ public class NewBehaviourScript : MonoBehaviour
         
         if (other.CompareTag("Player"))
         {
+            Debug.Log("ƒvƒŒƒX‹@“–‚½‚Á‚½");
             playerHealth.TakeDamage(100);
         }
     }

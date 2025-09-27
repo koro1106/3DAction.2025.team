@@ -3,10 +3,21 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager: MonoBehaviour
 {
-    [SerializeField] private GameObject puzzleBackButton;
-    
-    public void OnPuzzleBack()
+    public GameObject checkWindowObj;
+    private void Update()
     {
-        SceneManager.LoadScene("MainScene");
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            checkWindowObj.SetActive(true);
+        }
+    }
+   
+    public void OnYesButton()
+    {
+        SceneManager.LoadScene("MainStage1");
+    }
+   public void OnNoButton()
+    {
+        checkWindowObj.SetActive(false);
     }
 }
