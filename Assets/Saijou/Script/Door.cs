@@ -19,6 +19,13 @@ public class Door : MonoBehaviour
     {
         isDoorOpne = true;
         Debug.Log(isDoorOpne);
+
+        // プレイヤーの位置を保存
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            PlayerPositionStorage.savedPosition = player.transform.position;
+        }
         //シーン移動
         SceneManager.LoadScene(sceneToLoad);
     }

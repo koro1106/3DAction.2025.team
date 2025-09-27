@@ -8,7 +8,15 @@ public class SelectionManager : MonoBehaviour
 
     public void OnFirstStage()
     {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("MainStage1");
+    }
+    public void OnSecondStage()
+    {
+        SceneManager.LoadScene("MainStage2");
+    }
+    public void OnThirdStage()
+    {
+        SceneManager.LoadScene("MainStage3");
     }
     public void OnTitleStage()
     {

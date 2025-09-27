@@ -22,7 +22,7 @@ public class Spring : MonoBehaviour
         {
             Rigidbody rb = other.GetComponentInParent<Rigidbody>();
 
-            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            //rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
             if (squashCoroutine != null) StopCoroutine(squashCoroutine);
