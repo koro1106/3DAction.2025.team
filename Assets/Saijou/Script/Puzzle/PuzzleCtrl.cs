@@ -25,8 +25,17 @@ public class PuzzleCtrl : MonoBehaviour
    [SerializeField] private GameObject UI;
    [SerializeField] private GameObject TimeLine;
 
+    private bool isClear = false;//クリアしているか
+
+    [System.Serializable]
+    public class PuzzleImageSet
+    {
+        public Sprite[] sprites; //7枚 (pieceID 0?6)
+    }
+    public List<PuzzleImageSet> puzzleImageSets; // 各ケース用の画像セット
     void Start()
     {
+        SetDifficultySceneName();//タグを見て絵柄セット
         InitializePuzzle();//初期化処理
         UpdateProgress();//進捗度ゲージ更新
     }
@@ -59,6 +68,10 @@ public class PuzzleCtrl : MonoBehaviour
         {
             RotatePuzzle(-90f); // 右回転
         }
+        if (isClear && Input.GetKeyDown(KeyCode.Return))
+        {
+            SceneManager.LoadScene("MainStage1");
+        }
     }
 
     void OnPuzzleRotated()
@@ -85,20 +98,33 @@ public class PuzzleCtrl : MonoBehaviour
 
         //進捗度ゲージ更新
         UpdateProgress();
-        if (CheckClear())
+        if (!isClear && CheckClear())
         {
-            Debug.Log("クリア！");
+            isClear = true;
+            Debug.Log("クリア判定通った！");
             UI.SetActive(false);
             TimeLine.SetActive(true);
             if (playableDirector != null)
             {
                 playableDirector.Play();  // Timeline再生開始
             }
-            if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        }
+    }
+
+    void SetDifficultySceneName()
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        if (sceneName.StartsWith("MainStage"))
+        {
+            string numberPart = sceneName.Replace("MainStage", "");
+            if (int.TryParse(numberPart, out int parsedDifficulty))
             {
-                SceneManager.LoadScene("MainStage1");
+                difficulty = Mathf.Clamp(parsedDifficulty, 0, puzzleImageSets.Count - 1);
+                Debug.Log("シーン名から難易度を設定: " + difficulty);
             }
         }
+
     }
     public void InitializePuzzle()//初期化処理
     {
@@ -140,11 +166,20 @@ public class PuzzleCtrl : MonoBehaviour
             GameObject piece = Instantiate(piecePrefub, localPos, Quaternion.identity, puzzle);
 
             PuzzlePiece pp = piece.GetComponent<PuzzlePiece>();
-            pp.pieceID = currentPieceOrder[i]; // IDを割り当て
+            pp.pieceID = currentPieceOrder[i]; //IDを割り当て
 
+            //スプライト設定
+            SpriteRenderer sr = piece.GetComponent<SpriteRenderer>();
+            if (sr != null)
+            {
+                //例:スプライトをセット（List<Sprite[]> を使う場合）
+                sr.sprite = puzzleImageSets[difficulty].sprites[pp.pieceID];
+            }
+
+            //グリッドに登録
             grid[pos.x, pos.y] = piece;
         }
-
+       
         // 固定ピース生成
         Vector3 fixedLocalPos = new Vector3(fixedPiecePos.x - 1, -(fixedPiecePos.y - 1), 0);
         Instantiate(fixedPrefub, fixedLocalPos, Quaternion.identity, puzzle);
