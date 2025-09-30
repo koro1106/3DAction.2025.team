@@ -4,7 +4,11 @@ using UnityEngine.SceneManagement;
 public class SelectionManager : MonoBehaviour
 {
     [SerializeField] private GameObject firstStageButton;
-    [SerializeField] private GameObject titleBackButton;
+    [SerializeField] private GameObject secondStageButton;
+    [SerializeField] private GameObject thirdStageButton;
+    [SerializeField] private GameObject fourthStageButton;
+    [SerializeField] private GameObject fifthStageButton;
+    [SerializeField] private GameObject sixthStageButton;
 
     public void OnFirstStage()
     {
@@ -29,9 +33,5 @@ public class SelectionManager : MonoBehaviour
     public void OnSixthStage()
     {
         SceneManager.LoadScene("MainStage6");
-    }
-    public void OnTitleStage()
-    {
-        SceneManager.LoadScene("TitleScene");
     }
 }

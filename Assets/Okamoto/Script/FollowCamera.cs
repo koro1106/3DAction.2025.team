@@ -12,11 +12,15 @@ public class FollowCamera : MonoBehaviour
 
         //âÒì]å≈íË
         transform.rotation = Quaternion.identity;
-        Vector3 desiredPosition = target.position + offset;
+
+        //Vector3 desiredPosition = target.position + offset;
+        //Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
+        //transform.position = smoothedPosition;
+        Vector3 desiredPosition = new Vector3(target.position.x + offset.x, transform.position.y, transform.position.z);
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
         transform.position = smoothedPosition;
 
         // èÌÇ…ÉvÉåÉCÉÑÅ[Çå©ÇÈ
-       // transform.LookAt(target);
+        // transform.LookAt(target);
     }
 }
