@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
-using UnityEngine.Timeline;
-using static UnityEditor.PlayerSettings;
 
 public class PuzzleCtrl : MonoBehaviour
 {
