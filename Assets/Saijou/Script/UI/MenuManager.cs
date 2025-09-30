@@ -12,11 +12,20 @@ public class MenuManager: MonoBehaviour
         }
     }
    
-    public void OnYesButton()
+    public void OnPuzzleYesButton()
     {
         SceneManager.LoadScene("MainStage1");
     }
-   public void OnNoButton()
+   public void OnPuzzleNoButton()
+   {
+        checkWindowObj.SetActive(false);
+   }
+
+    public void OnSelectionYesButton()
+    {
+        SceneManager.LoadScene("SelectionScene");
+    }
+    public void OnSelectionNoButton()
     {
         checkWindowObj.SetActive(false);
     }
