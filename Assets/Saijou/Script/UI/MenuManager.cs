@@ -29,4 +29,12 @@ public class MenuManager: MonoBehaviour
     {
         checkWindowObj.SetActive(false);
     }
+    public void OnTitleYesButton()
+    {
+        SceneManager.LoadScene("TitleScene");
+    }
+    public void OnTitleNoButton()
+    {
+        checkWindowObj.SetActive(false);
+    }
 }
