@@ -93,14 +93,9 @@ public class PullShootParabolicFall : MonoBehaviour
     }
     void OnCollisionStay(Collision col)
     {
-        foreach (ContactPoint contact in col.contacts)
+        if (col.gameObject.CompareTag("Ground"))
         {
-            // 地面と接触したら引っ張り回数リセット
-            if (Vector3.Dot(contact.normal, Vector3.up) > 0.5f)
-            {
-                remainingPulls = 1;
-                break;
-            }
+            remainingPulls = 1;
         }
     }
 }
