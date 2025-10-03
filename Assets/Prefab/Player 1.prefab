@@ -229,6 +229,10 @@ MonoBehaviour:
   minPullThreshold: 0.005
   arrowLine: {fileID: 663495594162006361}
   landingMarker: {fileID: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  fallDeathHeight: 4
 --- !u!33 &3240656630710190390
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -298,7 +302,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 1.1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &9067994008704871409
 Rigidbody:
