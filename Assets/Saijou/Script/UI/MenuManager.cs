@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 public class MenuManager: MonoBehaviour
 {
     public GameObject checkWindowObj;
+    [SerializeField] private SelectionManager selectionManager;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -14,7 +16,7 @@ public class MenuManager: MonoBehaviour
    
     public void OnPuzzleYesButton()
     {
-        SceneManager.LoadScene("MainStage1");
+        selectionManager.LoadStage("MainStage1");
     }
    public void OnPuzzleNoButton()
    {
@@ -23,7 +25,7 @@ public class MenuManager: MonoBehaviour
 
     public void OnSelectionYesButton()
     {
-        SceneManager.LoadScene("SelectionScene");
+        selectionManager.LoadStage("SelectionScene");
     }
     public void OnSelectionNoButton()
     {
@@ -31,7 +33,7 @@ public class MenuManager: MonoBehaviour
     }
     public void OnTitleYesButton()
     {
-        SceneManager.LoadScene("TitleScene");
+        selectionManager.LoadStage("TitleScene");
     }
     public void OnTitleNoButton()
     {

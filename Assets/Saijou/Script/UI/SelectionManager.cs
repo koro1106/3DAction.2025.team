@@ -10,28 +10,34 @@ public class SelectionManager : MonoBehaviour
     [SerializeField] private GameObject fifthStageButton;
     [SerializeField] private GameObject sixthStageButton;
 
+
+    public void LoadStage(string stageName)
+    {
+        StageLoader.NextStageName = stageName;
+        SceneManager.LoadScene("LoadingScene");
+    }
     public void OnFirstStage()
     {
-        SceneManager.LoadScene("MainStage1");
+        LoadStage("MainStage1");
     }
     public void OnSecondStage()
     {
-        SceneManager.LoadScene("MainStage2");
+        LoadStage("MainStage2");
     }
     public void OnThirdStage()
     {
-        SceneManager.LoadScene("MainStage3");
+        LoadStage("MainStage3");
     }
     public void OnFourthStage()
     {
-        SceneManager.LoadScene("MainStage4");
+        LoadStage("MainStage4");
     }
     public void OnFifthStage()
     {
-        SceneManager.LoadScene("MainStage5");
+        LoadStage("MainStage5");
     }
     public void OnSixthStage()
     {
-        SceneManager.LoadScene("MainStage6");
-    }
+        LoadStage("MainStage6");
+    }   
 }
