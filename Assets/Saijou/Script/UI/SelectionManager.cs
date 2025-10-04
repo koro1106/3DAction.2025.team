@@ -14,6 +14,7 @@ public class SelectionManager : MonoBehaviour
     public void LoadStage(string stageName)
     {
         StageLoader.NextStageName = stageName;
+        StageLoader.LastPlayedStageName = stageName;
         SceneManager.LoadScene("LoadingScene");
     }
     public void OnFirstStage()

@@ -36,8 +36,17 @@ public class PuzzleCtrl : MonoBehaviour
         SetDifficultySceneName();//タグを見て絵柄セット
         InitializePuzzle();//初期化処理
         UpdateProgress();//進捗度ゲージ更新
-    }
 
+        if (playableDirector != null)
+        {
+            playableDirector.stopped += OnTimelineFinished;
+        }
+    }
+    void OnTimelineFinished(PlayableDirector director)
+    {
+        Debug.Log("タイムライン終了 → シーン遷移");
+        SceneManager.LoadScene(StageLoader.LastPlayedStageName);
+    }
     //パズルのパターン
     private int[] GetPatternByDifficulty(int level)
     {
@@ -99,6 +108,8 @@ public class PuzzleCtrl : MonoBehaviour
         if (!isClear && CheckClear())
         {
             isClear = true;
+            StageLoader.LastPlayedStageName = SceneManager.GetActiveScene().name;
+
             Debug.Log("クリア判定通った！");
             UI.SetActive(false);
             TimeLine.SetActive(true);
@@ -111,7 +122,7 @@ public class PuzzleCtrl : MonoBehaviour
 
     void SetDifficultySceneName()
     {
-        string sceneName = SceneManager.GetActiveScene().name;
+        string sceneName = StageLoader.LastPlayedStageName;
 
         if (sceneName.StartsWith("MainStage"))
         {
@@ -122,7 +133,6 @@ public class PuzzleCtrl : MonoBehaviour
                 Debug.Log("シーン名から難易度を設定: " + difficulty);
             }
         }
-
     }
     public void InitializePuzzle()//初期化処理
     {

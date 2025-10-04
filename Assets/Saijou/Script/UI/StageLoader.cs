@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public static class StageLoader
 {
-    public static string NextStageName;
+    public static string NextStageName;//次のシーン保存
+    public static string LastPlayedStageName;//最後にいたシーン保存
 }
