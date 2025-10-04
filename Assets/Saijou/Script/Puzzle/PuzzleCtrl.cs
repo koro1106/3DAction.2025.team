@@ -46,6 +46,8 @@ public class PuzzleCtrl : MonoBehaviour
     {
         Debug.Log("タイムライン終了 → シーン遷移");
         SceneManager.LoadScene(StageLoader.LastPlayedStageName);
+        Debug.Log("最後にいたシーン名：" + StageLoader.LastPlayedStageName);
+
     }
     //パズルのパターン
     private int[] GetPatternByDifficulty(int level)
@@ -77,7 +79,7 @@ public class PuzzleCtrl : MonoBehaviour
         }
         if (isClear && Input.GetKeyDown(KeyCode.Return))
         {
-            SceneManager.LoadScene("MainStage1");
+            SceneManager.LoadScene("MainStage0");
         }
     }
 
@@ -108,7 +110,6 @@ public class PuzzleCtrl : MonoBehaviour
         if (!isClear && CheckClear())
         {
             isClear = true;
-            StageLoader.LastPlayedStageName = SceneManager.GetActiveScene().name;
 
             Debug.Log("クリア判定通った！");
             UI.SetActive(false);

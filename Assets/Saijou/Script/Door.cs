@@ -19,7 +19,9 @@ public class Door : MonoBehaviour
     {
         isDoorOpne = true;
         Debug.Log(isDoorOpne);
-
+        // シーン名を保存
+        StageLoader.LastPlayedStageName = SceneManager.GetActiveScene().name;
+        Debug.Log("最後にいたシーン名：" + StageLoader.LastPlayedStageName);
         // プレイヤーの位置を保存
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
