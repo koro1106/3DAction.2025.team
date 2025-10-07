@@ -3,7 +3,7 @@ using UnityEngine;
 public class FollowCamera : MonoBehaviour
 {
     public Transform target;          // プレイヤー
-    public Vector3 offset = new Vector3(0, 10f, -10f); // カメラの位置オフセット
+    public Vector3 offset = new Vector3(0, 10f, 0f); // カメラの位置オフセット
     public float smoothSpeed = 5f;    // カメラの追従速度
 
     void LateUpdate()
