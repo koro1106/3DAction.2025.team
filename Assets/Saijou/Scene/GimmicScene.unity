@@ -241,6 +241,84 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1001 &805304989
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4749896135323431542, guid: 41b063f48b3c7c84d8cea941b65358c7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749896135323431542, guid: 41b063f48b3c7c84d8cea941b65358c7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749896135323431542, guid: 41b063f48b3c7c84d8cea941b65358c7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 13.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749896135323431542, guid: 41b063f48b3c7c84d8cea941b65358c7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749896135323431542, guid: 41b063f48b3c7c84d8cea941b65358c7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749896135323431542, guid: 41b063f48b3c7c84d8cea941b65358c7,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749896135323431542, guid: 41b063f48b3c7c84d8cea941b65358c7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749896135323431542, guid: 41b063f48b3c7c84d8cea941b65358c7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749896135323431542, guid: 41b063f48b3c7c84d8cea941b65358c7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749896135323431542, guid: 41b063f48b3c7c84d8cea941b65358c7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824544659173524424, guid: 41b063f48b3c7c84d8cea941b65358c7,
+        type: 3}
+      propertyPath: m_Name
+      value: Slider (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824544659173524424, guid: 41b063f48b3c7c84d8cea941b65358c7,
+        type: 3}
+      propertyPath: m_TagString
+      value: UpDown
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336609103230174657, guid: 41b063f48b3c7c84d8cea941b65358c7,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1798975217}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 41b063f48b3c7c84d8cea941b65358c7, type: 3}
 --- !u!1 &990715592
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,7 +688,7 @@ Transform:
   m_GameObject: {fileID: 1798975212}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.73, y: 2.36, z: 13.12}
+  m_LocalPosition: {x: 7.8, y: 2.36, z: 13.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -695,7 +773,7 @@ PrefabInstance:
     - target: {fileID: 4749896135323431542, guid: 41b063f48b3c7c84d8cea941b65358c7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.46
+      value: 11.7
       objectReference: {fileID: 0}
     - target: {fileID: 4749896135323431542, guid: 41b063f48b3c7c84d8cea941b65358c7,
         type: 3}
@@ -746,6 +824,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slider
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824544659173524424, guid: 41b063f48b3c7c84d8cea941b65358c7,
+        type: 3}
+      propertyPath: m_TagString
+      value: LeftRight
       objectReference: {fileID: 0}
     - target: {fileID: 6336609103230174657, guid: 41b063f48b3c7c84d8cea941b65358c7,
         type: 3}
@@ -903,5 +986,6 @@ SceneRoots:
   - {fileID: 251285907123550014}
   - {fileID: 1382211148980136876}
   - {fileID: 1328773613232545949}
+  - {fileID: 805304989}
   - {fileID: 1798975217}
   - {fileID: 3066873734336055565}

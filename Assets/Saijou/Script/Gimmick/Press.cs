@@ -14,13 +14,10 @@ public class NewBehaviourScript : MonoBehaviour
     {
         initialY = transform.localPosition.y;
         initialX = transform.localPosition.x;
-
     }
 
     void Update()
     {
-       // if (playerHealth.isDead) return;
-
         if (gameObject.tag == "UpDown")
         {
           UpDownPress();
