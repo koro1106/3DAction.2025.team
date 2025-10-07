@@ -16,7 +16,7 @@ public class MenuManager: MonoBehaviour
    
     public void OnPuzzleYesButton()
     {
-        selectionManager.LoadStage("MainStage1");
+        selectionManager.LoadStage("MainStage0");
     }
    public void OnPuzzleNoButton()
    {
