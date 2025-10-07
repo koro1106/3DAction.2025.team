@@ -23,7 +23,7 @@ public class PuzzleCtrl : MonoBehaviour
    [SerializeField] private GameObject UI;
    [SerializeField] private GameObject TimeLine;
 
-    private bool isClear = false;//クリアしているか
+    public bool isClear = false;//クリアしているか
 
     [System.Serializable]
     public class PuzzleImageSet
@@ -298,6 +298,10 @@ public class PuzzleCtrl : MonoBehaviour
     //クリア判定
     bool CheckClear()
     {
+        //壁消える
+        PlayerPrefs.SetInt(StageLoader.LastPlayedStageName + "_Cleared", 1);
+        PlayerPrefs.Save();
+
         //正解パターン
         int[] correntOrder = new int[] { 0, 1, 2, 3, 4, 5, 6 }; 
         

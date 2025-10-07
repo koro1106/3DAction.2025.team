@@ -15,19 +15,19 @@ EditorBuildSettings:
     path: Assets/Scenes/MainStage0.unity
     guid: 13bffff46b51e0443b06cfd51fd8e44c
   - enabled: 1
-    path: Assets/Scenes/MainStage2.unity
+    path: Assets/Scenes/MainStage1.unity
     guid: 9b26cd0ac90b4f243b0f78b7b798c317
   - enabled: 1
-    path: Assets/Scenes/MainStage3.unity
+    path: Assets/Scenes/MainStage2.unity
     guid: 77d8bcbcd8a793b409f675cec0455f92
   - enabled: 1
-    path: Assets/Scenes/MainStage4.unity
+    path: Assets/Scenes/MainStage3.unity
     guid: 4cf26d017fc381640a50f30df931c176
   - enabled: 1
-    path: Assets/Scenes/MainStage5.unity
+    path: Assets/Scenes/MainStage4.unity
     guid: b966b5b96dda5664e9f4077cfd893bbf
   - enabled: 1
-    path: Assets/Scenes/MainStage6.unity
+    path: Assets/Scenes/MainStage5.unity
     guid: f8b65900eaacb204883f7d269adbac1c
   - enabled: 1
     path: Assets/Saijou/Scene/PuzzleScene.unity
