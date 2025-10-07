@@ -19,26 +19,26 @@ public class SelectionManager : MonoBehaviour
     }
     public void OnFirstStage()
     {
-        LoadStage("MainStage1");
+        LoadStage("MainStage0");
     }
     public void OnSecondStage()
     {
-        LoadStage("MainStage2");
+        LoadStage("MainStage1");
     }
     public void OnThirdStage()
     {
-        LoadStage("MainStage3");
+        LoadStage("MainStage2");
     }
     public void OnFourthStage()
     {
-        LoadStage("MainStage4");
+        LoadStage("MainStage3");
     }
     public void OnFifthStage()
     {
-        LoadStage("MainStage5");
+        LoadStage("MainStage4");
     }
     public void OnSixthStage()
     {
-        LoadStage("MainStage6");
+        LoadStage("MainStage5");
     }   
 }
