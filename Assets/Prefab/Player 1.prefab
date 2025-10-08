@@ -200,11 +200,11 @@ MonoBehaviour:
   currentHP: 100
   m: {fileID: 6931993571375856865}
   playerDestoroy: {fileID: 0}
-  sprite100: {fileID: 2100000, guid: aadd1ab4c40b4f944805dbc87b28f305, type: 2}
-  sprite80: {fileID: 2100000, guid: c8c7e31e430e0a84f923b257e85e8e5d, type: 2}
-  sprite60: {fileID: 2100000, guid: f0dd4f01c0ea33a4b9fd08dfeac1d20d, type: 2}
-  sprite40: {fileID: 2100000, guid: 943138705382f9348a833bf4d4934bb0, type: 2}
-  sprite20: {fileID: 2100000, guid: ec82cf4a8e5a7f14696439d6d9d15adc, type: 2}
+  sprite100: {fileID: 2100000, guid: e8a39e60104e6de49b80d50d3856c113, type: 2}
+  sprite80: {fileID: 2100000, guid: 9373c9d5be341eb4ca4fcd2d127f897e, type: 2}
+  sprite60: {fileID: 2100000, guid: 957ee94ccea866446b502d542b1962d7, type: 2}
+  sprite40: {fileID: 2100000, guid: 0d189a108c1839d4ea2e6c45cf9ef9a1, type: 2}
+  sprite20: {fileID: 2100000, guid: f5bf257d8610d744399a605f4b13c795, type: 2}
   brokenPrefab: {fileID: 8860219258066217407}
   child: {fileID: 9095085952310229979}
   isDead: 0
