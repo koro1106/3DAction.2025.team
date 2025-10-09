@@ -11,6 +11,8 @@ public class Spring : MonoBehaviour
     private Vector3 originalScale;
     private Coroutine squashCoroutine;
 
+    [SerializeField] private SEManager seManager; // SE
+
     private void Start()
     {
         originalScale = transform.parent.localScale;
@@ -20,6 +22,8 @@ public class Spring : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
+            seManager.SpringSE(); // SE
+
             Rigidbody rb = other.GetComponentInParent<Rigidbody>();
 
             //rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
