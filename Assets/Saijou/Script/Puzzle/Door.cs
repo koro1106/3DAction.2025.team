@@ -7,6 +7,7 @@ public class Door : MonoBehaviour
     public string sceneToLoad;//移動先のシーン名
     private bool isPlayerNear = false;//Playerがドア近づいているか
     private bool isDoorOpne = false;//ドアが開いたか
+    [SerializeField] private SEManager seManager; // SE
 
     private void Update()
     {
@@ -28,10 +29,13 @@ public class Door : MonoBehaviour
         {
             PlayerPositionStorage.savedPosition = player.transform.position;
         }
-        //シーン移動
+        seManager.DoorSE();
+        Invoke(nameof(LoadNextScene), 0.2f); // ← 0.2秒後にシーン遷移
+    }
+    private void LoadNextScene()
+    {
         SceneManager.LoadScene(sceneToLoad);
     }
-
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Door"))

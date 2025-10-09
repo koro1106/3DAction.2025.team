@@ -25,6 +25,8 @@ public class PuzzleCtrl : MonoBehaviour
 
     public bool isClear = false;//クリアしているか
 
+    [SerializeField] private SEManager seManager;//SE
+
     [System.Serializable]
     public class PuzzleImageSet
     {
@@ -71,15 +73,13 @@ public class PuzzleCtrl : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
+            seManager.PuzzleRotateSE();//SE
             RotatePuzzle(90f); // 左回転
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
+            seManager.PuzzleRotateSE();//SE
             RotatePuzzle(-90f); // 右回転
-        }
-        if (isClear && Input.GetKeyDown(KeyCode.Return))
-        {
-            SceneManager.LoadScene("MainStage0");
         }
     }
 
@@ -111,7 +111,7 @@ public class PuzzleCtrl : MonoBehaviour
         {
             isClear = true;
 
-            Debug.Log("クリア判定通った！");
+            seManager.PuzzleFinishSE();//SE
             UI.SetActive(false);
             TimeLine.SetActive(true);
             if (playableDirector != null)

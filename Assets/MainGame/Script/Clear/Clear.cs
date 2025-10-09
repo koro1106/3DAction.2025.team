@@ -7,6 +7,7 @@ public class Clear : MonoBehaviour
     public Vector3 goalPosition;  // ゴールオブジェクトの位置
     public float triggerRange = 2f;  // 通過判定に使用する距離範囲
     private bool hasPlayerPassed = false;  // プレイヤーが通過したかどうか
+    [SerializeField] private SEManager seManager;
 
     void Update()
     {
@@ -16,9 +17,14 @@ public class Clear : MonoBehaviour
             if (player.transform.position.x > goalPosition.x + triggerRange)
             {
                 hasPlayerPassed = true;
+                seManager.GoalSE();
                 Debug.Log("プレイヤーがゴールを通過しました！シーン遷移します。");
-                SceneManager.LoadScene("ClearScene");  // シーン遷移
+                Invoke(nameof(LoadNextScene), 0.2f); // ← 0.2秒後にシーン遷移
             }
         }
+    }
+    private void LoadNextScene()
+    {
+        SceneManager.LoadScene("ClearScene");  // シーン遷移
     }
 }
