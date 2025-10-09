@@ -1,4 +1,3 @@
-using System.Globalization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,6 +11,8 @@ public class SelectionManager : MonoBehaviour
     [SerializeField] private GameObject sixthStageButton;
     [SerializeField] private GameObject stagecheckWindowObj;
 
+    [SerializeField] private SEManager seManager;//SE
+
     private string selectedStageName = "";//選択中のステージ名保存
     public void LoadStage(string stageName)
     {
@@ -22,6 +23,8 @@ public class SelectionManager : MonoBehaviour
     //各ステージボタンが呼び出す
     public void OnStageButtonClicked(string stageName)
     {
+        seManager.ClickUISE();//SE
+
         selectedStageName = stageName;
         stagecheckWindowObj.SetActive(true);//チェックウィンドウ表示
     }
@@ -29,6 +32,8 @@ public class SelectionManager : MonoBehaviour
     //チェックウィンドウYes
     public void OnCheckYes()
     {
+        seManager.DecideSE();//SE
+
         StageLoader.NextStageName = selectedStageName;
         StageLoader.LastPlayedStageName = selectedStageName;
         SceneManager.LoadScene("LoadingScene");
@@ -36,6 +41,8 @@ public class SelectionManager : MonoBehaviour
     //チェックウィンドウNo
     public void OnCheckNo()
     {
+        seManager.CancelSE();//SE
+
         selectedStageName = "";
         stagecheckWindowObj.SetActive(false); // キャンセル
     }

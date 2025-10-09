@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LeftRightButton : MonoBehaviour
@@ -10,9 +8,12 @@ public class LeftRightButton : MonoBehaviour
     public GameObject leftButton;
     public GameObject rightLine;
     public GameObject leftLine;
+    [SerializeField] private SEManager seManager;//SE
 
     public void OnRightButoon()
     {
+        seManager.ClickUISE();//SE
+
         rightButton.SetActive(false);
         stage123.SetActive(false);
 
@@ -24,6 +25,8 @@ public class LeftRightButton : MonoBehaviour
     }
     public void OnLeftButoon()
     {
+        seManager.ClickUISE();//SE
+
         leftButton.SetActive(false);
         stage456.SetActive(false);
 
