@@ -46,6 +46,7 @@ public class PlayerHealth : MonoBehaviour
 
     public float force = 500f;
 
+    [SerializeField] private SEManager seManager;
     void Start()
 
     {
@@ -73,17 +74,13 @@ public class PlayerHealth : MonoBehaviour
     }
 
     void Update()
-
     {
-
         // スペースキーで5ダメージテスト
 
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
 
         {
-
             TakeDamage(5);
-
         }
 
     }
@@ -96,16 +93,15 @@ public class PlayerHealth : MonoBehaviour
 
         currentHP -= amount;
 
+        seManager.PlayerDamageSE();// SE
+
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
 
         UpdateSprite();
 
         if (currentHP <= 0)
-
         {
-
             Die();
-
         }
 
     }
@@ -179,8 +175,9 @@ public class PlayerHealth : MonoBehaviour
         if (playerDestoroy != null)
 
         {
-
-            StartCoroutine(playerDestoroy.LoadSelectionScene());
+            seManager.PlayerDestroySE();
+            Invoke(nameof(LoadNextScene), 0.2f); // ← 0.2秒後にシーン遷移
+           
 
         }
 
@@ -198,6 +195,11 @@ public class PlayerHealth : MonoBehaviour
 
         if (m != null) m.enabled = false;
 
+    }
+
+    private void LoadNextScene()
+    {
+        StartCoroutine(playerDestoroy.LoadSelectionScene());
     }
 
 }
