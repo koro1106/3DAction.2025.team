@@ -8,15 +8,21 @@ public class SEManager : MonoBehaviour
     public AudioClip decideSE;
     public AudioClip cancelSE;
 
+    // Puzzle
     public AudioClip puzzleResetSE;
     public AudioClip puzzleRotateSE;
     public AudioClip puzzleFinishSE;
 
+    // Gimmick
     public AudioClip springSE;
     public AudioClip crashBrockSE;
     public AudioClip goalSE;
     public AudioClip doorSE;
     public AudioClip clearDoorSE;
+
+    // Player
+    public AudioClip playerDamageSE;
+    public AudioClip playerDestroySE;
 
 
     public void StartButtonSE()　//スタートボタンSE
@@ -59,9 +65,17 @@ public class SEManager : MonoBehaviour
     {
         audioSource.PlayOneShot(doorSE);
     }
-    public void ClearDoorSE() //パズルシーン移行SE
+    public void ClearDoorSE() //パズルシ-ンクリアドアSE
     {
         audioSource.PlayOneShot(clearDoorSE);
+    }
+    public void PlayerDamageSE() //プレイヤーダメージSE
+    {
+        audioSource.PlayOneShot(playerDamageSE);
+    }
+    public void PlayerDestroySE() //プレイヤー死亡SE
+    {
+        audioSource.PlayOneShot(playerDestroySE);
     }
     
 }

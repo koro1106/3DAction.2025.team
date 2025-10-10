@@ -4132,6 +4132,16 @@ MonoBehaviour:
   clickUISE: {fileID: 8300000, guid: e45897aa616308d4f89fbee2826735f5, type: 3}
   decideSE: {fileID: 8300000, guid: 4930b283626ef63448bfa14e978ec9f7, type: 3}
   cancelSE: {fileID: 8300000, guid: 6847063d8257bd74082862967705013d, type: 3}
+  puzzleResetSE: {fileID: 0}
+  puzzleRotateSE: {fileID: 0}
+  puzzleFinishSE: {fileID: 0}
+  springSE: {fileID: 0}
+  crashBrockSE: {fileID: 0}
+  goalSE: {fileID: 0}
+  doorSE: {fileID: 0}
+  clearDoorSE: {fileID: 0}
+  playerDamageSE: {fileID: 0}
+  playerDestroySE: {fileID: 0}
 --- !u!4 &1577543982
 Transform:
   m_ObjectHideFlags: 0
