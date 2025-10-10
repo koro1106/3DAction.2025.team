@@ -8,16 +8,20 @@ public class CrashBlock : MonoBehaviour
     [Header("ダメージ量")]
     public int damageToPlayer = 1;    // プレイヤーに与えるダメージ
     private bool isBroken = false;
+    [SerializeField] private SEManager seManager; // SE
     void OnCollisionEnter(Collision collision)
     {
+       
         if (isBroken) return;
         if (collision.gameObject.CompareTag("Player"))
         {
+            seManager.CrushBlockSE(); // SE
             // プレイヤーHPを減らす
             PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
             if (player != null)
             {
                 player.TakeDamage(damageToPlayer);
+               
             }
             // 自分を破壊
             BreakBlock();
