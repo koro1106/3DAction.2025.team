@@ -1,77 +1,99 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 [RequireComponent(typeof(Rigidbody))]
 public class PullShootParabolicFall : MonoBehaviour
 {
     public float maxPullDistance = 0.06f;
     public float jumpPower = 5f;
     public float minPullThreshold = 0.005f;
-    public LineRenderer arrowLine;
+
+    [Header("UI Elements")]
+    public GameObject arrowImage; // ← SpriteRenderer付き矢印画像
     public GameObject landingMarker;
-    [SerializeField] private LayerMask groundLayer; // 地面レイヤー
-    [SerializeField] private float fallDeathHeight = 4f; // 落下死の高さしきい値
+
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float fallDeathHeight = 4f;
+
     private Rigidbody rb;
     private Camera mainCamera;
     private Vector3 dragStart;
     private bool isDragging;
-    private int remainingPulls = 2; // ← 最大2回に修正
+    private int remainingPulls = 2;
     private bool positionRestored = false;
-    // 落下判定用
-    private float highestY; // 移動開始ごとの最高Y座標を記録
-    private bool isFallingCheck; // 落下チェック中フラグ
+
+    private float highestY;
+    private bool isFallingCheck;
     private PlayerHealth health;
+    [SerializeField] private SEManager seManager;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
         rb.isKinematic = true;
         mainCamera = Camera.main;
-        arrowLine.enabled = false;
-        if (landingMarker != null) landingMarker.SetActive(false);
+
+        if (arrowImage != null)
+            arrowImage.SetActive(false);
+
+        if (landingMarker != null)
+            landingMarker.SetActive(false);
+
         health = GetComponent<PlayerHealth>();
     }
+
     void Update()
     {
-        // シーン遷移で位置復元
         if (!positionRestored && PlayerPositionStorage.savedPosition != Vector3.zero)
         {
             transform.position = PlayerPositionStorage.savedPosition;
             positionRestored = true;
         }
+
         if (remainingPulls <= 0) return;
+
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             dragStart = GetMouseWorldPosition();
             isDragging = true;
-            arrowLine.enabled = true;
+            if (arrowImage != null) arrowImage.SetActive(true);
         }
+
         if (Mouse.current.leftButton.isPressed && isDragging)
         {
             Vector3 curr = GetMouseWorldPosition();
             Vector3 pull = dragStart - curr;
             pull.z = 0;
+
             if (pull.magnitude > maxPullDistance)
                 pull = pull.normalized * maxPullDistance;
-            ShowArrow(pull);
+
+            ShowArrowImage(pull);
+
             if (landingMarker) landingMarker.transform.position = transform.position + pull;
         }
+
         if (Mouse.current.leftButton.wasReleasedThisFrame && isDragging)
         {
             Vector3 release = GetMouseWorldPosition();
             Vector3 pull = dragStart - release;
             pull.z = 0;
+
             if (pull.magnitude >= minPullThreshold)
             {
                 if (pull.magnitude > maxPullDistance)
                     pull = pull.normalized * maxPullDistance;
+
                 Launch(pull);
                 remainingPulls--;
             }
+
             isDragging = false;
-            arrowLine.enabled = false;
+            if (arrowImage != null) arrowImage.SetActive(false);
             if (landingMarker) landingMarker.SetActive(false);
         }
-        // 空中のときは最高Yを記録
+
         if (!rb.isKinematic && rb.useGravity)
         {
             if (transform.position.y > highestY)
@@ -80,6 +102,29 @@ public class PullShootParabolicFall : MonoBehaviour
             }
         }
     }
+
+    void ShowArrowImage(Vector3 dir)
+    {
+        if (arrowImage == null) return;
+
+        //Cubeの右上角をワールド座標で計算
+        Vector3 cubeSize = transform.localScale;
+        Vector3 cornerOffset = new Vector3(cubeSize.x / 3f, cubeSize.y / 3f, 0f);
+        Vector3 cornerPosition = transform.position + cornerOffset;
+
+        //矢印の根本（ピボット位置）を角に配置
+        arrowImage.transform.position = cornerPosition;
+
+        //引っ張り方向の逆向き（発射方向）に回転
+        float angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg + 90f;
+        arrowImage.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+        // 長さスケール調整（Y方向に伸ばす）
+        float scaleRate = dir.magnitude / maxPullDistance;
+        arrowImage.transform.localScale = new Vector3(1f, scaleRate, 1f);
+    }
+
+
     void Launch(Vector3 pull)
     {
         rb.isKinematic = false;
@@ -87,10 +132,10 @@ public class PullShootParabolicFall : MonoBehaviour
         Vector3 velocity = pull.normalized * (pull.magnitude / maxPullDistance) * jumpPower;
         velocity.y = Mathf.Max(velocity.y, jumpPower * 0.5f);
         rb.velocity = velocity;
-        // 新しい移動開始 → 最高点をリセット
         highestY = transform.position.y;
         isFallingCheck = true;
     }
+
     Vector3 GetMouseWorldPosition()
     {
         Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
@@ -98,20 +143,13 @@ public class PullShootParabolicFall : MonoBehaviour
             return ray.GetPoint(d);
         return Vector3.zero;
     }
-    void ShowArrow(Vector3 dir)
-    {
-        arrowLine.positionCount = 2;
-        arrowLine.SetPosition(0, transform.position);
-        arrowLine.SetPosition(1, transform.position + dir);
-        float rate = dir.magnitude / maxPullDistance;
-        arrowLine.material.color = rate < 0.33f ? Color.green :
-                                   rate < 0.66f ? Color.yellow : Color.red;
-    }
+
     private void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.CompareTag("Ground"))
         {
-            // 着地時に落下死判定
+            seManager.PlayerGraundSE();
+
             if (isFallingCheck)
             {
                 float fallDistance = highestY - transform.position.y;
@@ -126,7 +164,7 @@ public class PullShootParabolicFall : MonoBehaviour
                 }
                 isFallingCheck = false;
             }
-            // 地面に着いたらまた移動できるように
+
             remainingPulls = 2;
         }
     }

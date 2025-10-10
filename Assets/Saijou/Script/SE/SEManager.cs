@@ -19,11 +19,13 @@ public class SEManager : MonoBehaviour
     public AudioClip goalSE;
     public AudioClip doorSE;
     public AudioClip clearDoorSE;
+    public AudioClip crushBlockSE;
+
 
     // Player
     public AudioClip playerDamageSE;
     public AudioClip playerDestroySE;
-
+    public AudioClip playerGraundSE;
 
     public void StartButtonSE()　//スタートボタンSE
     {
@@ -69,6 +71,10 @@ public class SEManager : MonoBehaviour
     {
         audioSource.PlayOneShot(clearDoorSE);
     }
+    public void CrushBlockSE() //クラッシュブロック
+    {
+        audioSource.PlayOneShot(crushBlockSE);
+    }
     public void PlayerDamageSE() //プレイヤーダメージSE
     {
         audioSource.PlayOneShot(playerDamageSE);
@@ -76,6 +82,11 @@ public class SEManager : MonoBehaviour
     public void PlayerDestroySE() //プレイヤー死亡SE
     {
         audioSource.PlayOneShot(playerDestroySE);
+    }
+    
+    public void PlayerGraundSE() //プレイヤー着地音
+    {
+        audioSource.PlayOneShot(playerGraundSE);
     }
     
 }
