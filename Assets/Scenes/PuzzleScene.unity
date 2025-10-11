@@ -254,7 +254,7 @@ MonoBehaviour:
   clickUISE: {fileID: 8300000, guid: e45897aa616308d4f89fbee2826735f5, type: 3}
   decideSE: {fileID: 8300000, guid: 4930b283626ef63448bfa14e978ec9f7, type: 3}
   cancelSE: {fileID: 8300000, guid: 6847063d8257bd74082862967705013d, type: 3}
-  puzzleResetSE: {fileID: 0}
+  puzzleResetSE: {fileID: 8300000, guid: 883b6a882c794f74abc944685686286c, type: 3}
   puzzleRotateSE: {fileID: 8300000, guid: 8c24e56509fb8d14085264efa954af99, type: 3}
   puzzleFinishSE: {fileID: 8300000, guid: 6a75a20809131b249aaacfa3db6d961c, type: 3}
   springSE: {fileID: 0}
@@ -310,7 +310,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 3d00a4af3a9c6634c85ed502ca2222b4, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0

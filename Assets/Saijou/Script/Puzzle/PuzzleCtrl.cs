@@ -57,15 +57,19 @@ public class PuzzleCtrl : MonoBehaviour
         switch (level)
         {
             case 0:
-                return new int[] { 2, 0, 5, 3, 1, 4, 6 }; //簡単
+                return new int[] { 1, 4, 0, 3, 5, 2, 6 }; //Stage1
             case 1:
-                return new int[] { 6, 5, 4, 3, 2, 1, 0 }; //難しめ
+                return new int[] { 1, 4, 0, 3, 5, 2, 6 }; //Stage2
             case 2:
-                return new int[] { 1, 4, 0, 2, 5, 6, 3 }; //ランダム1
+                return new int[] { 0, 1, 3, 6, 2, 4, 5 }; //Stage3
             case 3:
-                return new int[] { 3, 1, 6, 0, 5, 4, 2 }; //ランダム2
+                return new int[] { 0, 1, 3, 6, 2, 4, 5 }; //Stage4
+            case 4:
+                return new int[] { 2, 0, 5, 3, 1, 4, 6 }; //Stage5
+            case 5:
+                return new int[] { 2, 0, 5, 3, 1, 4, 6 }; //Stage6
             default:
-                return new int[] { 0, 1, 2, 3, 4, 5, 6 }; //デフォルト
+                return new int[] { 0, 1, 2, 3, 4, 5, 6 }; 
         }
     }
 

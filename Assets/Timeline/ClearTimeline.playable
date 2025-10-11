@@ -137,7 +137,7 @@ MonoBehaviour:
     volume: 1
     stereoPan: 0
     spatialBlend: 0
---- !u!114 &-1902574170296907579
+--- !u!114 &-2585654541047313446
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21bf7f712d84d26478ebe6a299f21738, type: 3}
-  m_Name: Activation Track
+  m_Name: Activation Track (1)
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
@@ -159,12 +159,12 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 8.583333333333334
+    m_Start: 0
     m_ClipIn: 0
-    m_Asset: {fileID: 520245077902614830}
-    m_Duration: 13.176666666666668
+    m_Asset: {fileID: 5127216931059177530}
+    m_Duration: 21.76
     m_TimeScale: 1
-    m_ParentTrack: {fileID: -1902574170296907579}
+    m_ParentTrack: {fileID: -2585654541047313446}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: 0
@@ -264,7 +264,7 @@ MonoBehaviour:
   - {fileID: -5418858152287411163}
   - {fileID: 4749871379092787022}
   - {fileID: 8214091724474857941}
-  - {fileID: -1902574170296907579}
+  - {fileID: -2585654541047313446}
   - {fileID: -3969392898477977157}
   m_FixedDuration: 0
   m_EditorSettings:
@@ -272,18 +272,6 @@ MonoBehaviour:
     m_ScenePreview: 1
   m_DurationMode: 0
   m_MarkerTrack: {fileID: 0}
---- !u!114 &520245077902614830
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fde0d25a170598d46a0b9dc16b4527a5, type: 3}
-  m_Name: ActivationPlayableAsset
-  m_EditorClassIdentifier: 
 --- !u!114 &4749871379092787022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -325,6 +313,18 @@ MonoBehaviour:
   m_OpenClipOffsetRotation: {x: 0, y: 0, z: 0, w: 1}
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
   m_ApplyOffsets: 0
+--- !u!114 &5127216931059177530
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fde0d25a170598d46a0b9dc16b4527a5, type: 3}
+  m_Name: ActivationPlayableAsset
+  m_EditorClassIdentifier: 
 --- !u!74 &5848491921039581379
 AnimationClip:
   m_ObjectHideFlags: 0

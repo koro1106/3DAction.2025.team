@@ -8,7 +8,7 @@ public class PuzzleReset : MonoBehaviour
     {
     if (Input.GetKeyDown(KeyCode.R))
        {
-            seManager.PuzzleResetSE();//SE
+           seManager.PuzzleResetSE();//SE
            puzzleCtrl.InitializePuzzle();
        }
     }
