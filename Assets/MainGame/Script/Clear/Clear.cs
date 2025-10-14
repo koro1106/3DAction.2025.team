@@ -16,6 +16,8 @@ public class Clear : MonoBehaviour
             // プレイヤーの位置とゴールオブジェクトの位置を比較
             if (player.transform.position.x > goalPosition.x + triggerRange)
             {
+                PlayerPositionStorage.savedPosition = Vector3.zero;// 位置保存リセット
+
                 hasPlayerPassed = true;
                 seManager.GoalSE();
                 Debug.Log("プレイヤーがゴールを通過しました！シーン遷移します。");
