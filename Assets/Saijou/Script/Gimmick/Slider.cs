@@ -115,11 +115,15 @@ public class Slider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // プレイヤーと触れた場合にダメージを与える
         if (other.CompareTag("Player"))
         {
             playerHealth = other.GetComponent<PlayerHealth>();
-            playerHealth.TakeDamage(1);
-            col.enabled = false;//playerと接触したら通過する
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(2); // ダメージを与える
+            }
         }
     }
+
 }

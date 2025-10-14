@@ -196,13 +196,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e38772cc8c6af4a9cd26e32f89fe2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
-  currentHP: 100
+  maxHP: 60
+  currentHP: 60
   m: {fileID: 6931993571375856865}
   playerDestoroy: {fileID: 0}
   sprite100: {fileID: 2100000, guid: e8a39e60104e6de49b80d50d3856c113, type: 2}
-  sprite80: {fileID: 2100000, guid: 9373c9d5be341eb4ca4fcd2d127f897e, type: 2}
-  sprite60: {fileID: 2100000, guid: 957ee94ccea866446b502d542b1962d7, type: 2}
+  sprite80: {fileID: 2100000, guid: e8a39e60104e6de49b80d50d3856c113, type: 2}
+  sprite60: {fileID: 2100000, guid: e8a39e60104e6de49b80d50d3856c113, type: 2}
   sprite40: {fileID: 2100000, guid: 0d189a108c1839d4ea2e6c45cf9ef9a1, type: 2}
   sprite20: {fileID: 2100000, guid: f5bf257d8610d744399a605f4b13c795, type: 2}
   brokenPrefab: {fileID: 8860219258066217407}
@@ -212,6 +212,7 @@ MonoBehaviour:
     type: 3}
   fragmentCount: 40
   force: 200
+  seManager: {fileID: 0}
 --- !u!114 &7767323820495517673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,12 +228,13 @@ MonoBehaviour:
   maxPullDistance: 6
   jumpPower: 10
   minPullThreshold: 0.005
-  arrowLine: {fileID: 663495594162006361}
+  arrowImage: {fileID: 0}
   landingMarker: {fileID: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
   fallDeathHeight: 4
+  seManager: {fileID: 0}
 --- !u!33 &3240656630710190390
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -345,6 +347,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distance: 3
   sceneToLoad: PuzzleScene
+  seManager: {fileID: 0}
 --- !u!1 &9095085952310229979
 GameObject:
   m_ObjectHideFlags: 0
