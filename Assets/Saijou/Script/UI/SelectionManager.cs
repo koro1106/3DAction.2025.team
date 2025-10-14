@@ -20,6 +20,15 @@ public class SelectionManager : MonoBehaviour
         StageLoader.LastPlayedStageName = stageName;
         SceneManager.LoadScene("LoadingScene");
     }
+
+    public void LoadStageWithReset(string stageName)
+    {
+        PlayerPrefs.SetInt("ResetPlayerPosition", 1); // リセットフラグをセット
+        PlayerPrefs.SetString("StageToLoad", stageName); // 読み込むステージ名をセット（任意）
+        PlayerPrefs.Save();
+        SceneManager.LoadScene(stageName);
+    }
+
     //各ステージボタンが呼び出す
     public void OnStageButtonClicked(string stageName)
     {
