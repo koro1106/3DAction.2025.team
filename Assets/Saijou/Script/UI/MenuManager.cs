@@ -14,14 +14,18 @@ public class MenuManager: MonoBehaviour
             checkWindowObj.SetActive(true);
         }
     }
-   
+    public void OnEscButton()
+    {
+        seManager.ClickUISE();//SE
+        checkWindowObj.SetActive(true);
+    }
     public void OnPuzzleYesButton()
     {
         seManager.DecideSE();//SE
 
         selectionManager.LoadStage(StageLoader.LastPlayedStageName);
     }
-
+   
    public void OnPuzzleNoButton()
    {
         seManager.CancelSE();//SE
