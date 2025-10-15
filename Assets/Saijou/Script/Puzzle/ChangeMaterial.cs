@@ -11,7 +11,7 @@ public class ChangeMaterial : MonoBehaviour
     void Start()
     {
         //　保存したクリア情報を確認
-        if (PlayerPrefs.GetInt(stageID + "_Cleared", 0) == 1)
+        if (PlayerPrefs.GetInt(stageID + "_Cleared", -1) == 1)
         {
             seManager.CancelSE();
             doorRenderer.material = clearMat;//マテリアル変更

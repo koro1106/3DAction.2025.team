@@ -35,6 +35,8 @@ public class PuzzleCtrl : MonoBehaviour
     public List<PuzzleImageSet> puzzleImageSets; // 各ケース用の画像セット
     void Start()
     {
+        isClear = false;
+
         SetDifficultySceneName();//タグを見て絵柄セット
         InitializePuzzle();//初期化処理
         UpdateProgress();//進捗度ゲージ更新
