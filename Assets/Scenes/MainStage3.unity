@@ -11282,7 +11282,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 25.4, y: -12.5}
+  m_AnchoredPosition: {x: 25.4, y: -13.5}
   m_SizeDelta: {x: 160, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &605818311
@@ -28091,6 +28091,58 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451899063}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1455558850
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1455558851}
+  - component: {fileID: 1455558852}
+  m_Layer: 0
+  m_Name: SelectionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1455558851
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455558850}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -476.58292, y: -619.50684, z: 76.28229}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1875284175}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1455558852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455558850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15d6eb5ca68fee7419d2bc80ca32e109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstStageButton: {fileID: 0}
+  secondStageButton: {fileID: 0}
+  thirdStageButton: {fileID: 0}
+  fourthStageButton: {fileID: 0}
+  fifthStageButton: {fileID: 0}
+  sixthStageButton: {fileID: 0}
+  stagecheckWindowObj: {fileID: 0}
+  seManager: {fileID: 0}
 --- !u!1001 &1455961737
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29632,7 +29684,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -24.5, y: -13.2}
+  m_AnchoredPosition: {x: -24.5, y: -13.5}
   m_SizeDelta: {x: 160, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1571854836
@@ -34949,7 +35001,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkWindowObj: {fileID: 399283595}
-  selectionManager: {fileID: 0}
+  selectionManager: {fileID: 1455558852}
   seManager: {fileID: 774397978}
 --- !u!224 &1828476682
 RectTransform:
@@ -35745,6 +35797,7 @@ Transform:
   m_Children:
   - {fileID: 774397979}
   - {fileID: 1828476682}
+  - {fileID: 1455558851}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1875600234
