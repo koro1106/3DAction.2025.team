@@ -16055,12 +16055,17 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 560804512}
+      objectReference: {fileID: 1080369774}
     - target: {fileID: 1950205384181156136, guid: b82740b46d182af459bbbee58fee3f4a,
         type: 3}
       propertyPath: seManager
       value: 
       objectReference: {fileID: 1949176408}
+    - target: {fileID: 1950205384181156136, guid: b82740b46d182af459bbbee58fee3f4a,
+        type: 3}
+      propertyPath: goalPosition.x
+      value: 156
+      objectReference: {fileID: 0}
     - target: {fileID: 2569323551612684519, guid: b82740b46d182af459bbbee58fee3f4a,
         type: 3}
       propertyPath: m_LocalScale.x
